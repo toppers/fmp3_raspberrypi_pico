@@ -1,0 +1,27 @@
+# core_kernel_impl.c
+p_exc_tbl
+p_vector_table
+default_exc_handler
+default_int_handler
+config_int
+core_initialize
+core_terminate
+idstkpt_table
+p_bitpat_cfgint
+set_exc_int_priority
+enable_exc
+disable_exc
+p_iipm_enable_irq_tbl
+
+# core_support.S
+core_int_entry
+core_exc_entry
+svc_handler
+pendsv_handler
+dispatch
+do_dispatch
+dispatcher_1
+start_r
+start_dispatch
+exit_and_dispatch
+call_exit_kernel

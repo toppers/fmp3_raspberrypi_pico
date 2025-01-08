@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "RaspberryPiPico",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/../fmp3/include",
+                "${workspaceFolder}/../fmp3/target/raspberrypi_pico_gcc",
+                "${workspaceFolder}/../fmp3/arch/arm_m_gcc/rp2040",
+                "${workspaceFolder}/../fmp3/arch/arm_m_gcc/common",
+                "${workspaceFolder}/../fmp3/arch/gcc",
+                "${workspaceFolder}/../fmp3",
+                "${workspaceFolder}/../fmp3/kernel",
+                "${workspaceFolder}/../fmp3/sample",
+                "${workspaceFolder}/build/generated"
+            ],
+            "defines": [
+                "TOPPERS_OMIT_TECS"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,17 @@
+TA_DIRECT
+TMAX_INTNO,TMAX_INTNO
+TBITW_IPRI
+sizeof_TCB,sizeof(TCB)
+offsetof_TCB_p_tinib,"offsetof(TCB,p_tinib)"
+offsetof_TCB_pc,"offsetof(TCB,tskctxb.pc)"
+offsetof_TCB_sp,"offsetof(TCB,tskctxb.sp)"
+offsetof_TINIB_TSKINICTXB_stk_bottom,"offsetof(TINIB,tskinictxb.stk_bottom)"
+offsetof_TINIB_TSKINICTXB_stk_top,"offsetof(TINIB,tskinictxb.stk_top)"
+sizeof_PCB,sizeof(PCB)
+offsetof_PCB_p_runtsk,"offsetof(PCB,p_runtsk)"
+offsetof_PCB_p_schedtsk,"offsetof(PCB,p_schedtsk)"
+offsetof_PCB_target_pcb,"offsetof(PCB,target_pcb)"
+offsetof_PCB_idstkpt,"offsetof(PCB,target_pcb.idstkpt)"
+offsetof_PCB_lock_flag,"offsetof(PCB,target_pcb.lock_flag)"
+offsetof_PCB_iipm_enable_masks,"offsetof(PCB,target_pcb.iipm_enable_masks)"
+offsetof_PCB_current_iipm_enable_mask,"offsetof(PCB,target_pcb.current_iipm_enable_mask)"

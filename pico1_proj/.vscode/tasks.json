@@ -1,0 +1,60 @@
+{
+	"version": "2.1.0",
+	"tasks": [
+		{
+			"label": "remove build dir",
+			"type": "shell",
+			"command": "rm",
+			"args": [
+				"-R",
+				"build"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		},
+		{
+			"label": "make build dir",
+			"type": "shell",
+			"command": "mkdir",
+			"args": [
+				"build"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"dependsOn": "remove build dir"
+		},
+		{
+			"label": "configure",
+			"type": "shell",
+			"command": "cmake",
+			"args": [
+				"-G",
+				"Ninja",
+				".."
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/build"
+			},
+			"dependsOn": "make build dir"
+		},
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "cmake",
+			"args": [
+				"--build",
+				"."
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/build"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"dependsOn": "configure",
+			"group": "build"
+		}
+	]
+}

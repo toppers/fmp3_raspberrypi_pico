@@ -1,0 +1,160 @@
+# startup.c
+barrier_sync
+exit_kernel
+dispatch_handler
+ext_ker_handler
+
+# task.c
+initialize_task
+search_schedtsk
+update_schedtsk_dsp
+make_runnable
+make_non_runnable
+make_dormant
+make_active
+change_priority
+change_subprio
+rotate_ready_queue
+task_terminate
+migrate_self
+migrate_activate_self
+
+# taskhook.c
+mtxhook_check_ceilpri
+mtxhook_release_all
+
+# wait.c
+make_wait_tmout
+wait_dequeue_wobj
+wait_complete
+wait_tmout
+wait_tmout_ok
+wobj_make_wait
+wobj_make_wait_tmout
+init_wait_queue
+
+# time_event.c
+boundary_evttim
+current_evttim
+current_hrtcnt
+monotonic_evttim
+systim_offset
+initialize_tmevt
+tmevt_up
+tmevt_down
+update_current_evttim
+set_hrt_event
+set_hrt_event_handler
+tmevtb_register
+tmevtb_enqueue
+tmevtb_enqueue_reltim
+tmevtb_dequeue
+check_adjtim
+tmevt_lefttim
+signal_time
+
+# semaphore.c
+initialize_semaphore
+
+# eventflag.c
+initialize_eventflag
+check_flg_cond
+
+# dataqueue.c
+initialize_dataqueue
+enqueue_data
+force_enqueue_data
+dequeue_data
+send_data
+force_send_data
+receive_data
+
+# pridataq.c
+initialize_pridataq
+enqueue_pridata
+dequeue_pridata
+send_pridata
+receive_pridata
+
+# mutex.c
+initialize_mutex
+mutex_check_ceilpri
+mutex_acquire
+mutex_release
+mutex_release_all
+
+# mempfix.c
+initialize_mempfix
+get_mpf_block
+
+# spin_lock.c
+initialize_spin_lock
+force_unlock_spin
+
+# cyclic.c
+initialize_cyclic
+call_cyclic
+
+# alarm.c
+initialize_alarm
+call_alarm
+
+# interrupt.c
+initialize_interrupt
+
+# exception.c
+initialize_exception
+
+# kernel_cfg.c
+kerflg_table
+p_pcb_table
+initialize_object
+inirtnbb_table
+terrtnbb_table
+subprio_primap
+tmax_tskid
+tinib_table
+torder_table
+p_tcb_table
+tmax_semid
+seminib_table
+p_semcb_table
+tmax_flgid
+flginib_table
+p_flgcb_table
+tmax_dtqid
+dtqinib_table
+p_dtqcb_table
+tmax_pdqid
+pdqinib_table
+p_pdqcb_table
+tmax_mtxid
+mtxinib_table
+p_mtxcb_table
+tmax_mpfid
+mpfinib_table
+p_mpfcb_table
+tmax_spnid
+spninib_table
+p_spncb_table
+tmax_cycid
+cycinib_table
+p_cyccb_table
+tmax_almid
+alminib_table
+p_almcb_table
+tnum_def_inhno
+inhinib_table
+tnum_cfg_intno
+intinib_table
+tnum_def_excno
+excinib_table
+p_tevtcb_table
+p_tmevt_heap_table
+istksz_table
+istk_table
+istkpt_table
+idstk_table
+idstkpt_table
+
+INCLUDE "target"
