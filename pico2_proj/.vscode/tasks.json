@@ -1,12 +1,16 @@
 {
-	"version": "2.1.0",
+	"version": "2.0.0",
 	"tasks": [
 		{
 			"label": "remove build dir",
 			"type": "shell",
+			"windows": {
+				"command": "if (Test-Path \"build\") { Remove-Item \"build\" -Recurse -Force }",
+				"args": []
+			},
 			"command": "rm",
 			"args": [
-				"-R",
+				"-rf",
 				"build"
 			],
 			"options": {
@@ -16,14 +20,18 @@
 		{
 			"label": "make build dir",
 			"type": "shell",
+			"windows": {
+				"command": "if (-Not (Test-Path \"build\")) { New-Item -ItemType Directory \"build\" }",
+				"args": []
+			},
 			"command": "mkdir",
 			"args": [
+				"-p",
 				"build"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
-			},
-			"dependsOn": "remove build dir"
+			}
 		},
 		{
 			"label": "configure",
@@ -36,8 +44,7 @@
 			],
 			"options": {
 				"cwd": "${workspaceFolder}/build"
-			},
-			"dependsOn": "make build dir"
+			}
 		},
 		{
 			"label": "build",
@@ -55,6 +62,20 @@
 			],
 			"dependsOn": "configure",
 			"group": "build"
+		},
+		{
+			"label": "clean build",
+			"type": "process",
+			"dependsOn": [
+				"remove build dir",
+				"make build dir",
+				"configure",
+				"build"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": [
+				"$gcc"
+			]
 		}
 	]
 }

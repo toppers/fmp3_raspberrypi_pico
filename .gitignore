@@ -1,0 +1,10 @@
+# CMake build artifacts
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+!/fmp3/sample/Makefile
+
+# Build directories
+/pico1_proj/build/
+/pico2_proj/build/
