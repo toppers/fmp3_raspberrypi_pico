@@ -36,7 +36,12 @@ foreach(path IN LISTS FMP3_SYMVAL_TABLES)
 endforeach()
 
 foreach(path IN LISTS FMP3_API_TABLES)
-    list(APPEND CFG_API_TABLES "--api-table" ${path})
+    string(REGEX MATCH ".+/([^/_]+)_api\\.def" MATCHED ${path})
+    list(APPEND CFG_API_TRB_NAMES ${CMAKE_MATCH_1})
+endforeach()
+
+foreach(path name IN ZIP_LISTS FMP3_API_TABLES CFG_API_TRB_NAMES)
+    list(APPEND CFG_API_TABLES "--api-table" "${path}:${name}")
 endforeach()
 
 foreach(path IN LISTS FMP3_CLASS_TRB_FILES)
@@ -47,8 +52,8 @@ foreach(path IN LISTS FMP3_OFFSET_TRB_FILES)
     list(APPEND CFG_OFFSET_TRB_FILES "-T" ${path})
 endforeach()
 
-foreach(path IN LISTS FMP3_KERNEL_CFG_TRB_FILES)
-    list(APPEND CFG_KERNEL_CFG_TRB_FILES "-T" ${path})
+foreach(path name IN ZIP_LISTS FMP3_KERNEL_CFG_TRB_FILES CFG_API_TRB_NAMES)
+    list(APPEND CFG_KERNEL_CFG_TRB_FILES "-T" "${path}:${name}")
 endforeach()
 
 foreach(path IN LISTS FMP3_CHECK_TRB_FILES)
@@ -56,6 +61,10 @@ foreach(path IN LISTS FMP3_CHECK_TRB_FILES)
 endforeach()
 
 foreach(path IN LISTS FMP3_INCLUDE_DIRS)
+    list(APPEND CFG_INCLUDE_DIRS "-I${path}")
+endforeach()
+
+foreach(path IN LISTS FMP3_APP_INCLUDE_DIRS)
     list(APPEND CFG_INCLUDE_DIRS "-I${path}")
 endforeach()
 
@@ -69,11 +78,35 @@ set(CFG1_OUT_FILE ${CFG1_OUT_DIR}/cfg1_out.c)
 set(CFG1_OUT cfg1_out)
 set(KERNEL_CFG_DIR ${CMAKE_BINARY_DIR}/generated)
 set(OFFSET_H_FILE ${KERNEL_CFG_DIR}/offset.h)
-set(KERNEL_CFG_H_FILE ${KERNEL_CFG_DIR}/kernel_cfg.h)
-set(KERNEL_CFG_C_FILE ${KERNEL_CFG_DIR}/kernel_cfg.c)
 set(CFG1_OUT_SYMS_FILE ${KERNEL_CFG_DIR}/cfg1_out.syms)
 set(CFG1_OUT_SREC_FILE ${KERNEL_CFG_DIR}/cfg1_out.srec)
 set(CFG2_OUT_DB_FILE ${KERNEL_CFG_DIR}/cfg2_out.db)
+
+list(APPEND FMP3_CFG_GEN_H_FILES
+    kernel_cfg.h
+)
+
+list(APPEND FMP3_CFG_GEN_C_FILES
+    kernel_cfg.c
+)
+
+foreach(file IN LISTS FMP3_CFG_GEN_H_FILES)
+    list(APPEND CFG_GEN_H_FILES ${KERNEL_CFG_DIR}/${file})
+endforeach()
+
+foreach(file IN LISTS FMP3_CFG_GEN_C_FILES)
+    list(APPEND CFG_GEN_C_FILES ${KERNEL_CFG_DIR}/${file})
+endforeach()
+
+# ソースコードを公開する
+add_custom_target(generate_cfg_gen_files ALL
+    DEPENDS ${CFG_GEN_H_FILES} ${CFG_GEN_C_FILES}
+)
+
+# 出力ディレクトリを他のターゲットで使えるように公開
+set(FMP3_CFG_GEN_DIR ${KERNEL_CFG_DIR} PARENT_SCOPE)
+set(FMP3_INCLUDE_DIRS ${FMP3_INCLUDE_DIRS} PARENT_SCOPE)
+set(FMP3_COMPILE_DEFS ${FMP3_COMPILE_DEFS} PARENT_SCOPE)
 
 # 出力ディレクトリを作成
 file(MAKE_DIRECTORY ${CFG1_OUT_DIR})
@@ -154,11 +187,11 @@ add_custom_command(
 
 # pass 2 for kernel_cfg.h/c
 add_custom_command(
-    OUTPUT ${KERNEL_CFG_H_FILE} ${KERNEL_CFG_C_FILE} ${CFG2_OUT_DB_FILE}
+    OUTPUT ${CFG_GEN_H_FILES} ${CFG_GEN_C_FILES} ${CFG2_OUT_DB_FILE}
     WORKING_DIRECTORY ${CFG1_OUT_DIR}
     COMMAND ruby ${PROJECT_SOURCE_DIR}/cfg/cfg.rb --pass 2 --kernel fmp ${CFG_INCLUDE_DIRS} ${CFG_CLASS_TRB_FILES} ${CFG_KERNEL_CFG_TRB_FILES}
     DEPENDS ${PROJECT_SOURCE_DIR}/cfg/cfg.rb ${OFFSET_H_FILE} ${FMP3_KERNEL_CFG_TRB_FILES}
-    COMMENT "Running cfg pass 2 to generate kernel_cfg.h kernel_cfg.c"
+    COMMENT "Running cfg pass 2 to generate ${FMP3_CFG_GEN_H_FILES} ${FMP3_CFG_GEN_C_FILES}"
 )
 
 # プロジェクトのソースファイルに生成されたCコードを追加
@@ -187,7 +220,7 @@ add_library(fmp3 STATIC
     kernel/time_event.c
     kernel/time_manage.c
     kernel/wait.c
-    ${KERNEL_CFG_C_FILE}
+    ${KERNEL_CFG_DIR}/kernel_cfg.c
 )
 
 #add_dependencies(fmp3 ${KERNEL_CFG_FILE})

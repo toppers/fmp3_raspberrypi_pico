@@ -65,14 +65,17 @@
 		},
 		{
 			"label": "clean build",
-			"type": "process",
+			"type": "shell",
+			"command": "echo",
+			"args": [
+				"Clean build completed."
+			],
 			"dependsOn": [
 				"remove build dir",
 				"make build dir",
 				"configure",
 				"build"
 			],
-			"command": "",
 			"dependsOrder": "sequence",
 			"problemMatcher": [
 				"$gcc"

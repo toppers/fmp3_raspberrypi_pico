@@ -25,10 +25,6 @@
 			"PICO_SDK_PATH": "${env:HOME}/.pico-sdk/sdk/2.1.0",
 			"PICO_TOOLCHAIN_PATH": "${env:HOME}/.pico-sdk/toolchain/13_3_Rel1",
 			"PATH": "${env:HOME}/.pico-sdk/toolchain/13_3_Rel1/bin:${env:HOME}/.pico-sdk/picotool/2.1.0/picotool:${env:HOME}/.pico-sdk/cmake/v3.29.9/bin:${env:HOME}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
-		},
-		"cortex-debug.variableUseNaturalFormat": false,
-		"cmake.configureArgs": [
-			"-DFMP3_TARGET=raspberrypi_pico2_gcc"
-		]
+		}
 	}
 }
