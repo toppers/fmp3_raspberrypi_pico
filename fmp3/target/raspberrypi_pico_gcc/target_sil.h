@@ -49,6 +49,11 @@
 #define TOPPERS_TARGET_SIL_H
 
 /*
+ *  SIL用のスピンロック番号の定義
+ */
+#define SPINLOCK_NO_FOR_SIL_LOCK        30
+
+/*
  * チップで共通な定義 
  */
 #include <chip_sil.h>

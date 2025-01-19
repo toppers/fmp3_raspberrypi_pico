@@ -165,7 +165,7 @@ extern LOCK *giant_lock;
 /*
  *  ロックの初期化
  */
-#define initialize_glock() giant_lock = (LOCK *)RP2040_SIO_SPINLOCKn(31)
+#define initialize_glock() giant_lock = (LOCK *)RP2040_SIO_SPINLOCKn(SPINLOCK_NO_FOR_GIANT_LOCK)
 
 /*
  * ロックの取得

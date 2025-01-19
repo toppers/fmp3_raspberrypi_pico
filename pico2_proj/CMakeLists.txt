@@ -41,8 +41,6 @@ add_executable(sample1
 
 add_subdirectory(../fmp3 fmp3)
 
-target_link_libraries(sample1 fmp3)
-
 target_include_directories(sample1 PRIVATE
     ${FMP3_ROOT_DIR}/sample
     ${CMAKE_CURRENT_LIST_DIR}
@@ -50,6 +48,8 @@ target_include_directories(sample1 PRIVATE
 
 include(${FMP3_ROOT_DIR}/library/library.cmake)
 include(${FMP3_ROOT_DIR}/syssvc/syssvc.cmake)
+
+target_link_libraries(sample1 fmp3)
 
 target_link_options(sample1 PRIVATE "LINKER:-Map=sample1.map")
 

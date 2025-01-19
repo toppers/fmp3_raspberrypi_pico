@@ -220,10 +220,10 @@ add_library(fmp3 STATIC
     kernel/time_event.c
     kernel/time_manage.c
     kernel/wait.c
-    ${KERNEL_CFG_DIR}/kernel_cfg.c
+    ${CFG_GEN_C_FILES}
 )
 
-#add_dependencies(fmp3 ${KERNEL_CFG_FILE})
+add_dependencies(fmp3 generate_cfg_gen_files)
 
 target_include_directories(fmp3
     PUBLIC ${FMP3_INCLUDE_DIRS}

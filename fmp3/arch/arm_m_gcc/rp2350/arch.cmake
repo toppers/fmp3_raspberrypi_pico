@@ -26,7 +26,12 @@ list(APPEND FMP3_ARCH_C_FILES
     ${ARCHDIR}/common/core_support.S
     ${ARCHDIR}/rp2350/chip_ipi.c
     ${ARCHDIR}/rp2350/chip_kernel_impl.c
-    ${ARCHDIR}/rp2350/chip_serial.c
 )
+
+if(NOT DEFINED TOPPERS_OMIT_CHIP_SERIAL)
+    list(APPEND FMP3_ARCH_C_FILES
+        ${ARCHDIR}/rp2350/chip_serial.c
+    )
+endif()
 
 set(ARCH_SERIAL ${ARCHDIR}/rp2350/chip_serial.c)

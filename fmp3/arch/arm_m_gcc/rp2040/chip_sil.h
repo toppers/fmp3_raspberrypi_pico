@@ -89,7 +89,7 @@ Inline void sil_get_pid(ID *p_prcid)
     *p_prcid = (*RP2040_SIO_CPUID) + 1;
 }
 
-#define TOPPERS_sil_spn_hw_reg ((volatile uint32_t *)RP2040_SIO_SPINLOCKn(30))
+#define TOPPERS_sil_spn_hw_reg ((volatile uint32_t *)RP2040_SIO_SPINLOCKn(SPINLOCK_NO_FOR_SIL_LOCK))
 
 /*
  * スピンロック変数（chip_kernel_impl.c）
