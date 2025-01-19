@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "."
-		},
-		{
 			"path": "pico1_proj"
 		},
 		{
 			"path": "pico2_proj"
+		},
+		{
+			"path": "."
 		}
 	],
 	"settings": {
@@ -25,6 +25,14 @@
 			"PICO_SDK_PATH": "${env:HOME}/.pico-sdk/sdk/2.1.0",
 			"PICO_TOOLCHAIN_PATH": "${env:HOME}/.pico-sdk/toolchain/13_3_Rel1",
 			"PATH": "${env:HOME}/.pico-sdk/toolchain/13_3_Rel1/bin:${env:HOME}/.pico-sdk/picotool/2.1.0/picotool:${env:HOME}/.pico-sdk/cmake/v3.29.9/bin:${env:HOME}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
+		},
+		"cmake.configureSettings": {
+			"CMAKE_MAKE_PROGRAM": "${userHome}/.pico-sdk/ninja/v1.12.1/ninja"
+		},
+		"cmake.generator": "Ninja",
+		"cmake.cmakePath": "${userHome}/.pico-sdk/cmake/v3.29.9/bin/cmake",
+		"cmake.environment": {
+			"PATH": "${userHome}/.pico-sdk/toolchain/13_3_Rel1/bin:${userHome}/.pico-sdk/picotool/2.1.0/picotool:${userHome}/.pico-sdk/cmake/v3.29.9/bin:${userHome}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
 		}
 	}
 }
