@@ -48,10 +48,12 @@
 #include "check.h"
 #include "task.h"
 
+#ifndef TOPPERS_OMIT_VECTOR_TABLE
 /*
  *  ベクタテーブル(kernel_cfg.c)
  */
 extern const FP* const p_vector_table[];
+#endif
 
 /*
  *  割り込みハンドラテーブル(kernel_cfg.c)
@@ -194,12 +196,12 @@ core_initialize(PCB *p_my_pcb)
     p_my_pcb->target_pcb.lock_flag = true;
     p_my_pcb->target_pcb.current_iipm_enable_mask = &p_my_pcb->target_pcb.iipm_enable_masks[IIPM_ENAALL];
 #endif /* __TARGET_ARCH_THUMB >= 4 */
-
+#ifndef TOPPERS_OMIT_VECTOR_TABLE
 	/*
 	 *  ベクタテーブルを設定
 	 */
 	sil_wrw_mem((void *)NVIC_VECTTBL, (uint32_t)p_vector_table[INDEX_PRC(p_my_pcb->prcid)]);
-
+#endif
 	/*
 	 *  各例外の優先度を設定
 	 *  CPUロック状態でも発生するように，BASEPRIレジスタでマスクでき
