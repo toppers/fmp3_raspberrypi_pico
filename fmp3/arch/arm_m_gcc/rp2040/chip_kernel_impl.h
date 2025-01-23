@@ -180,8 +180,9 @@ extern LOCK *giant_lock;
 /*
  * ネイティブスピンロックに関する定義と操作
  */
-
+#ifndef TMAX_NATIVE_SPN
 #define TMAX_NATIVE_SPN 30
+#endif
 
 /*
  * スピンロックの初期化
